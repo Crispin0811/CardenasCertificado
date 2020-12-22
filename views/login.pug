@@ -1,0 +1,18 @@
+doctype html
+html(lang='en' dir='ltr')
+  head
+    meta(charset='utf-8')
+    title
+    link(rel='stylesheet' href='css/custom.css')
+  body
+    .login-box
+      h1 Ingresar
+      .textbox
+        i.fas.fa-user
+        input(type='text' placeholder='DNI')
+      .textbox
+        i.fas.fa-lock
+        input(type='password' placeholder='Contraseña')
+      .error
+        p#error
+      input.btn(type='button' value='Ingresar')

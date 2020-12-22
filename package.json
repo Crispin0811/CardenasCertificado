@@ -1,0 +1,16 @@
+{
+  "name": "cardenascertificado",
+  "version": "1.0.0",
+  "description": "Programa desarrollado para emitir ceritificados de los colegios",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kevin Crispin",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.11.8",
+    "pug": "^3.0.0"
+  }
+}
