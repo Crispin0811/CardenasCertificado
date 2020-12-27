@@ -1,8 +1,9 @@
 const express = require("express");
 const app = express();
 
-const datosCardenasController = require("../controllers/colegioActualController");
+const colegioActualController = require("../controllers/colegioActualController");
+const este = require("../middleware/middleware");
 
-app.post("/", datosCardenasController.getDatosCardenar);
+app.post("/", este.prueba, colegioActualController.getDatosCardenar);
 
 module.exports = app;
