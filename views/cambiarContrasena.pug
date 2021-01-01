@@ -1,0 +1,23 @@
+extends partial/master
+
+block contenido
+    .contenido-principal
+      //- .alert.alert-success.ml-5(role="alert" style="width:400px;")
+      //-   | A simple success alert—check it out!
+      //- .alert.alert-danger(role="alert" style="width:400px;")
+      //-   | A simple danger alert—check it out!
+      //- .alert.alert-warning(role="alert" style="width:400px;")
+      //-   | A simple warning alert—check it out!
+      .form
+        form.sign-in-form(action="#")
+          h2.title Cambiar Constraseña
+          .input-field
+            i.fas.fa-lock
+            input(type="password" placeholder="Contraseña Actual" name="contraseñaActual")
+          .input-field
+            i.fas.fa-lock
+            input(type="password" placeholder="Nueva Contraseña" name="nuevaContraseña" id="nuevaContraseña")
+          .input-field
+            i.fas.fa-lock
+            input(type="password" placeholder="Repetir Contraseña" name="repetirContraseña" id="repetirContraseña")
+          input.btn.solid(type="submit" value="Actualizar")

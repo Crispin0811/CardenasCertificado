@@ -23,8 +23,8 @@ const Grado = new Schema({
     },
   ],
   colOrigen: {
-    type: Schema.Types.ObjectId,
-    ref: "ColegioOrigen",
+    type: String,
+    require: false,
   },
 });
 

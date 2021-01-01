@@ -19,6 +19,15 @@ const Trabajador = new Schem({
     require: true,
     default: "Secretaria",
   },
+  dni: {
+    type: String,
+    require: true,
+    default: "Secretaria",
+  },
+  contrasena: {
+    type: String,
+    require: true
+  },
 });
 
 module.exports = mongoose.model("Trabajador", Trabajador);

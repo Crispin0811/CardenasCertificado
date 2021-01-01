@@ -1,0 +1,31 @@
+extends partial/master
+
+block contenido
+    
+    .contenido-principal
+      //- .alert.alert-success.ml-5(role="alert" style="width:400px;") A simple success alert—check it out!
+      //- .alert.alert-danger(role="alert" style="width:400px;") A simple danger alert—check it out!
+      //- .alert.alert-warning(role="alert" style="width:400px;") A simple warning alert—check it out!
+      
+      .form
+        form.sign-in-form(action="#")
+          h2.title Agregar Trabajador
+          .input-field
+            i.fas.fa-user
+            input(type="text" placeholder="Nombres" name="nombres")
+          .input-field
+            i.fas.fa-user
+            input(type="text" placeholder="Apellido Paterno" name="apePaterno")
+          .input-field
+            i.fas.fa-user
+            input(type="text" placeholder="Apellido Materno" name="apePaterno")
+          .input-field
+            i.fas.fa-address-card
+            input(type="text" placeholder="DNI" name="dni")
+          p
+            label
+              input(type="checkbox" value="esDirector")
+              span Es director
+          input.btn.solid(type="submit" value="Agregar")
+          p.error asasasas
+    

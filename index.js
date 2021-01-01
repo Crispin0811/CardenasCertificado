@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const path = require("path");
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 app.use(express.static("public"));
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
 });
 
 //las rutas
-app.use(require('./routes/todasRutas'))
+app.use(require("./routes/todasRutas"));
 
 //coneccion a la base de datos
 require("./config/bd");
