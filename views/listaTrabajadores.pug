@@ -1,0 +1,24 @@
+extends partial/master
+
+block contenido
+    .contenido-principal
+        a.btn.solid.animate__animated.animate__backInLeft(href="#" style="width: 206px; padding-top: 6px; margin-left: 690px") Agregar Trabajador
+        .form(style="width: 800px; padding: 15px;")
+            h2.title Lista de Trabajadores
+            table.table.table-hover.table-bordered
+                thead.table-success
+                    tr.table-primary
+                        th(scope="col") DNI
+                        th(scope="col") Nombre
+                        th(scope="col") Apellidos
+                        th(scope="col") Rol
+                        th(scope="col") Acción
+                tbody
+                    tr
+                        td 12345678
+                        td Luis
+                        td Solorzano Gonzales
+                        td Director
+                        td
+                            a.btn-primary.btnAccion(href="#" role="button") Editar
+                            a.btn-danger.btnAccion(href="#" role="button") Eliminar

@@ -180,6 +180,8 @@ html {
   .contenido-principal h2 {
     font-size: 1.4rem;
     margin-top: 2rem;
+    margin-bottom: 2rem;
+
   }
   
   .contenido-principal .form {
@@ -207,4 +209,10 @@ html {
 {
     border: 2px solid #346cb0;  
     background-color: #346cb0;
+}
+
+.btnAccion{
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-right: 3px;
 }

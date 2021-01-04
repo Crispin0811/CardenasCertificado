@@ -1,0 +1,46 @@
+extends partial/master
+block contenido
+    .contenido-principal
+        .form(style="width: 800px; padding: 15px")
+            h2.title Generar Certificado
+            select#combo.form-select.mb-3.animate__animated.animate__backInLeft(aria-label="Default select example" style="width: 50%; margin: auto; padding: auto")
+                option(selected="") Buscar Por:
+                option(value="1") DNI
+                option(value="2") Código del Estudiante
+                option(value="3") Nombre y Apellidos
+            form.sign-in-form(action="#")
+                #dni.animate__animated.animate__slideInUp(style="display: none")
+                    .input-field
+                        i.fas.fa-address-card
+                        input(type="text" placeholder="DNI" name="dni")
+                #codEstudiante.animate__animated.animate__slideInUp(style="display: none")
+                    .input-field
+                        i.fas.fa-portrait
+                        input(type="text" placeholder="Código del Estudiante" name="codEstudiante")
+                #nombreApellidos.animate__animated.animate__slideInUp(style="width: 700px; display: none")
+                    .input-field(style="margin-right: 5px")
+                        i.fas.fa-user
+                        input(type="text" placeholder="Nombre" name="dni")
+                    .input-field(style="margin-right: 5px")
+                        i.fas.fa-user
+                        input(type="text" placeholder="Apellidos Paterno" name="apellidoPater")
+                    .input-field
+                        i.fas.fa-user
+                        input(type="text" placeholder="Apellidos Materno" name="apellidoMater")
+                input.btn.solid.animate__animated.animate__backInRight(type="submit" value="Buscar")
+            table.table.table-hover.table-bordered
+                thead.table-success
+                    tr.table-primary
+                        th(scope="col") DNI o codigo modular
+                        th(scope="col") Nombre
+                        th(scope="col") Apellidos
+                        th(scope="col") Certificado
+                tbody
+                    tr
+                        td 12345678
+                        td Luis
+                        td Solorzano Gonzales
+                        td
+                            a.btn-success.btnAccion(href="#" role="button") Imprimir
+    script(type="text/javascript" src="./js/animaciones.js")
+
