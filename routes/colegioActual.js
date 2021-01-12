@@ -4,6 +4,6 @@ const app = express();
 const colegioActualController = require("../controllers/colegioActualController");
 
 
-app.get("/", colegioActualController.getDatosCardenar);
+app.get("/", colegioActualController.getColegioActual);
 
 module.exports = app;

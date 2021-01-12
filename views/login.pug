@@ -4,11 +4,11 @@ head
   meta(name='viewport' content='width=device-width, initial-scale=1.0')
   script(src='https://kit.fontawesome.com/64d58efce2.js' crossorigin='anonymous')
   link(rel='stylesheet' href='./css/login.css')
-  title Iniciar Sesion
+  title #{tituloPagina}
 .container
   .forms-container
     .signin-signup
-      form.sign-in-form(action='#')
+      form.sign-in-form(action='/' method='post')
         h2.title Iniciar Sesión
         .input-field
           i.fas.fa-user
@@ -17,7 +17,11 @@ head
           i.fas.fa-lock
           input(type='password' placeholder='Contraseña' name='contrasena' required)
         input.btn.solid(type='submit' value='Iniciar')
-        p.error asasasas
+        
+        //- if errores
+        //-   each error in errores
+        //-     p.error asasasas
+
   .panels-container
     .panel.left-panel
       .content

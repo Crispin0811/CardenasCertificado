@@ -3,21 +3,21 @@ html(lang="en")
   head
     meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
-    title Document
+    title #{tituloPagina}
     // fontawesome
     script(src="https://kit.fontawesome.com/96b669279d.js" crossorigin="anonymous")
     // bootstrap
-    link(rel="stylesheet" href="./css/otros/bootstraop.min.css")
+    link(rel="stylesheet" href="/css/otros/bootstraop.min.css")
     // normalize
-    link(rel="stylesheet" href="./css/otros/normalize.css")
+    link(rel="stylesheet" href="/css/otros/normalize.css")
     // Import materialize.css
-    link(href="./css/otros/materializeIcons.css" rel="stylesheet")
-    link(type="text/css" rel="stylesheet" href="./css/otros/materialize.min.css")
+    link(href="/css/otros/materializeIcons.css" rel="stylesheet")
+    link(type="text/css" rel="stylesheet" href="/css/otros/materialize.min.css")
     // Import animate.css
-    link(href="./css/otros/animate.min.css" rel="stylesheet")
+    link(href="/css/otros/animate.min.css" rel="stylesheet")
     // propios estilos
-    link(rel="stylesheet" href="./css/login.css")
-    link(rel="stylesheet" href="./css/app.css")
+    link(rel="stylesheet" href="/css/login.css")
+    link(rel="stylesheet" href="/css/app.css")
 
   body
     header.barra
@@ -30,7 +30,7 @@ html(lang="en")
             ul
               .opciones
                 li
-                  a.hija(href="#")
+                  a.hija(href="/cambiar-contrasena")
                     | Cuenta
                     span
                       i.fas.fa-user
@@ -46,24 +46,24 @@ html(lang="en")
                 #director
                     ul#proyectos.proyectos
                         li
-                            a(href="#") Datos de la I.E.
+                            a(href="/colegio-actual") Datos de la I.E.
                               span
                                 i.fas.fa-graduation-cap
                         li
-                            a(href="#") Lista de Trabajadores
+                            a(href="/trabajador") Lista de Trabajadores
                               span
                                 i.fas.fa-users
                 #secretaria
                     ul#proyectos.proyectos
                         li
-                            a(href="#") Generar Certificado 
+                            a(href="/certificado") Generar Certificado 
                               span
                                 i.fas.fa-medal
                         li
-                            a(href="#") Agregar alumno
+                            a(href="/alumno") Agregar alumno
                               span
                                 i.fas.fa-user-graduate
                         
         block contenido  
-    script(type="text/javascript" src="./js/otros/materialize.min.js")
-    script(type="text/javascript" src="./js/otros/bootstrap.bundle.min.js")
+    script(type="text/javascript" src="/js/otros/materialize.min.js")
+    script(type="text/javascript" src="/js/otros/bootstrap.bundle.min.js")
