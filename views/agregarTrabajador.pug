@@ -12,19 +12,19 @@ block contenido
           h2.title Agregar Trabajador
           .input-field.animate__animated.animate__zoomIn
             i.fas.fa-user
-            input(type="text" placeholder="Nombres" name="nombres")
+            input(type="text" placeholder="Nombres" name="nombres" required)
           .input-field.animate__animated.animate__zoomIn
             i.fas.fa-user
-            input(type="text" placeholder="Apellido Paterno" name="apePaterno")
+            input(type="text" placeholder="Apellido Paterno" name="apePaterno" required)
           .input-field.animate__animated.animate__zoomIn
             i.fas.fa-user
-            input(type="text" placeholder="Apellido Materno" name="apePaterno")
+            input(type="text" placeholder="Apellido Materno" name="apeMaterno" required)
           .input-field.animate__animated.animate__zoomIn
             i.fas.fa-address-card
-            input(type="text" placeholder="DNI" name="dni")
+            input(type="text" placeholder="DNI" name="dni" required)
           p.animate__animated.animate__backInUp
             label
-              input(type="checkbox" value="esDirector")
+              input(type="checkbox" value="si" name="esDirector")
               span Es director
           input.btn.solid.animate__animated.animate__backInRight(type="submit" value="Agregar")
           p.error asasasas

@@ -1,0 +1,98 @@
+extends partial/master
+block contenido
+    .contenido-principal
+        .form(style="width: 800px; padding: 15px")
+            h2.title Agregar Alumno
+            form.sign-in-form(action="#")
+
+                #nombreApellidos(style="width: 700px; display: flex")
+                    .input-field(style="margin-right: 5px")
+                        i.fas.fa-user
+                        input(type="text" placeholder="Nombre" name="nombre" required="")
+                    .input-field(style="margin-right: 5px")
+                        i.fas.fa-user
+                        input(type="text" placeholder="Apellidos Paterno" name="apellidoPater" required="")
+                    .input-field
+                        i.fas.fa-user
+                        input(type="text" placeholder="Apellidos Materno" name="apellidoMater" required="")
+                #dniCodModular(style="width: 500px; display: flex")
+                    .input-field(style="margin-right: 5px")
+                        i.fas.fa-address-card
+                        input(type="text" placeholder="DNI" name="dni")
+                    .input-field
+                        i.fas.fa-portrait
+                        input(type="text" placeholder="Codigo del Estudiante " name="CodEstudiante")
+                select#cantidadCursos.form-select.combo.mt-2(style="width: 30%")
+                    option(selected="") Cantidad de curso:
+                    option(value="10") 10
+                    option(value="13") 13
+                #encabezado.mt-5(style="\
+                width: 470px;\
+                display: block;\
+                margin-right: -220px;\
+                border-spacing: 5px;\
+                ")
+                    #anioLectivo(style="display: flex")
+                        input#anioLectivoInicio.notas(type="text" name="anioLectivoInicio" required="")
+                        select.comboAnioLectivo.form-select.mb-3(style="width: 50%; margin: auto; padding: auto" name="segGr" disabled="")
+                            option(selected="") Año:
+                        select.comboAnioLectivo.form-select.mb-3(style="width: 50%; margin: auto; padding: auto" name="terGr" disabled="")
+                            option(selected="") Año:
+                        select.comboAnioLectivo.form-select.mb-3(style="width: 50%; margin: auto; padding: auto" name="cuaGr" disabled="")
+                            option(selected="") Año:
+                        select.comboAnioLectivo.form-select.mb-3(style="width: 50%; margin: auto; padding: auto" name="quiGr" disabled="")
+                            option(selected="") Año:
+                    #grado(style="display: flex")
+                        p(style="margin-left: 43px") 1°
+                        p(style="margin-left: 80px") 2°
+                        p(style="margin-left: 77px") 3°
+                        p(style="margin-left: 77px") 4°
+                        p(style="margin-left: 77px") 5°
+                
+                #notas.mt-2(style="\
+                width: 690px;\
+                display: block;\
+                border-spacing: 5px;\
+                margin-right: -40px;\
+                ")
+                
+                p
+                    label
+                        input#traslado.filled-in.checkbox-blue-grey(type="checkbox")
+                        span ¿Es trasladado?
+                #colegiosTraslados(style="display: none")
+                    div(style="display: flex; width: 500px")
+                        select.colegios.form-select.mb-3.aniosColegios(style="\
+                        width: 100px;\
+                        margin: auto;\
+                        padding: auto;\
+                        margin-right: 20px;\
+                        " name="aniLectivo1")
+                        .input-field
+                            i.fas.fa-warehouse
+                            input(type="text" placeholder="Nombre del Colegio" name="nombreColegio1")
+                    div(style="display: flex; width: 500px")
+                        select.colegios.form-select.mb-3.aniosColegios(style="\
+                        width: 100px;\
+                        margin: auto;\
+                        padding: auto;\
+                        margin-right: 20px;\
+                        " name="aniLectivo2")
+                        .input-field
+                            i.fas.fa-warehouse
+                            input(type="text" placeholder="Nombre del Colegio" name="nombreColegio2")
+                    div(style="display: flex; width: 500px")
+                        select.colegios.form-select.mb-3.aniosColegios(style="\
+                        width: 100px;\
+                        margin: auto;\
+                        padding: auto;\
+                        margin-right: 20px;\
+                        " name="aniLectivo3")
+                        .input-field
+                            i.fas.fa-warehouse
+                            input(type="text" placeholder="Nombre del Colegio" name="nombreColegio3")
+                
+                input.btn.solid.animate__animated.animate__backInRight(type="submit" value="Agregar")
+
+    script(type="text/javascript" src="./js/agregarCertificado.js")
+    
