@@ -46,6 +46,9 @@ anioLectivoInicio.addEventListener("blur", (e) => {
   }
 
   cbTraslado.checked = false;
+  divColegiosTraslados.style.display = "none";
+
+
 });
 
 // LLENAR LOS CAMPOS PARA LAS NOTAS
@@ -54,7 +57,7 @@ cantidadCursos.addEventListener("change", (e) => {
 
   if (cantidad == 10 || cantidad == 13) {
     for (j = 1; j <= cantidad; j++) {
-      console.log(j);
+      
 
       // div principal
       const divComboNotas = document.createElement("div");

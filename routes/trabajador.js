@@ -3,7 +3,8 @@ const app = express();
 const trabajadorController =require('../controllers/trabajadorController')
 
 app.get('/',trabajadorController.getTrabajadores)
-app.get('/agregar',trabajadorController.agregarTrabajador)
+app.get('/agregar',trabajadorController.verFormularioTrabajador)
+app.post('/agregar',trabajadorController.agregarTrabajador)
 
 
 

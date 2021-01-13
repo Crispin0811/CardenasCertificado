@@ -17,16 +17,17 @@ const Trabajador = new Schema({
   rol: {
     type: String,
     require: true,
-    default: "Secretaria",
   },
   dni: {
     type: String,
     require: true,
-    default: "Secretaria",
+    unique: [true,"El DNI ya existe"],
+    minLength: [8, "muy pequeño"],
+    maxlength: [8, "muy grande"],
   },
   contrasena: {
     type: String,
-    require: true
+    require: true,
   },
 });
 

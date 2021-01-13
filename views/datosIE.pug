@@ -6,25 +6,26 @@ block contenido
         .form(style="width: 700px")
             form.sign-in-form(action="#" style="padding: 0rem 3rem")
                 h2.title Datos de La Institución Educativa
-                .fila.animate__animated.animate__zoomIn
-                    .input-field(style="margin-right: 4px;")
-                        i.fas.fa-school
-                        input#nombColegioAct(type="text" placeholder="Nombre del Colegio" name="nombColegioAct")
-                    .input-field(style="margin-left: 4px;")
-                        i.fas.fa-warehouse
-                        input#ugel(type="text" placeholder="UGEL" name="ugel")
-                .fila.animate__animated.animate__zoomIn
-                    .input-field(style="margin-right: 4px;")
-                        i.fas.fa-address-card
-                        input(type="text" placeholder="Código Modular" name="nuevaContraseña" id="nuevaContraseña")
-                    .input-field(style="margin-left: 4px;")
-                        i.fas.fa-city
-                        input#departamento(type="text" placeholder="Departamento" name="departamento")
-                .fila.animate__animated.animate__zoomIn
-                    .input-field(style="margin-right: 4px;")
-                        i.fas.fa-building
-                        input#provincia(type="text" placeholder="Provincia" name="provincia")
-                    .input-field(style="margin-left: 4px;")
-                        i.fas.fa-home
-                        input#distrito(type="text" placeholder="Distrito" name="distrito")
-                input.btn.solid.animate__animated.animate__backInRight(type="submit" value="Aceptar")
+                if colegio
+                    .fila.animate__animated.animate__zoomIn
+                        .input-field(style="margin-right: 4px;")
+                            i.fas.fa-school
+                            input#nombColegioAct(type="text" placeholder="Nombre del Colegio" name="nombColegioAct" value=`${colegio.nombre}`) 
+                        .input-field(style="margin-left: 4px;")
+                            i.fas.fa-warehouse
+                            input#ugel(type="text" placeholder="UGEL" name="ugel" value=`${colegio.ugel}`)
+                    .fila.animate__animated.animate__zoomIn
+                        .input-field(style="margin-right: 4px;")
+                            i.fas.fa-address-card
+                            input(type="text" placeholder="Código Modular" name="codModular" value=`${colegio.codModular}`)
+                        .input-field(style="margin-left: 4px;")
+                            i.fas.fa-city
+                            input#departamento(type="text" placeholder="Departamento" name="departamento" value=`${colegio.region}`)
+                    .fila.animate__animated.animate__zoomIn
+                        .input-field(style="margin-right: 4px;")
+                            i.fas.fa-building
+                            input#provincia(type="text" placeholder="Provincia" name="provincia" value=`${colegio.provincia}`)
+                        .input-field(style="margin-left: 4px;")
+                            i.fas.fa-home
+                            input#distrito(type="text" placeholder="Distrito" name="distrito" value=`${colegio.distrito}`)
+                    input.btn.solid.animate__animated.animate__backInRight(type="submit" value="Aceptar")

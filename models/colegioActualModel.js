@@ -19,17 +19,14 @@ let ColegioActual = new Schema({
   },
   region: {
     type: String,
-    unique: true,
     require: [true, "El departamento del colegio es necesario"],
   },
   provincia: {
     type: String,
-    unique: true,
     require: [true, "La provincia del colegio es necesario"],
   },
   distrito: {
     type: String,
-    unique: true,
     require: [true, "El distrito del colegio es necesario"],
   },
 });

@@ -2,7 +2,9 @@ extends partial/master
 
 block contenido
     .contenido-principal
-        a.btn.solid.animate__animated.animate__backInLeft(href="/trabajador/agregar" style="width: 215px; padding-top: 6px; margin-left: 690px") Agregar Trabajador
+        if exito
+            .alert.alert-success.ml-5(role="alert" style="width:400px;") #{exito}
+        a.btn.solid.animate__animated.animate__backInLeft(href="/trabajador/agregar" style="width: 215px; padding-top: 6px; margin-left: 110px") Agregar Trabajador
         .form(style="width: 800px; padding: 15px;")
             h2.title Lista de Trabajadores
             table.table.table-hover.table-bordered
@@ -14,11 +16,13 @@ block contenido
                         th(scope="col") Rol
                         th(scope="col") Acción
                 tbody
-                    tr
-                        td 12345678
-                        td Luis
-                        td Solorzano Gonzales
-                        td Director
-                        td
-                            a.btn-primary.btnAccion(href="#" role="button") Editar
-                            a.btn-danger.btnAccion(href="#" role="button") Eliminar
+                    if trabajadores
+                        each trabajador in trabajadores
+                            tr
+                                td #{trabajador.dni}
+                                td #{trabajador.nombre}
+                                td #{trabajador.apellidoPaterno} #{trabajador.apellidoMaterno}
+                                td #{trabajador.rol}
+                                td
+                                    a.btn-primary.btnAccion(href=`/trabajador/editar/${trabajador._id}` role="button") Editar
+                                    a.btn-danger.btnAccion(href=`/trabajador/eliminar/${trabajador._id}` role="button") Eliminar
