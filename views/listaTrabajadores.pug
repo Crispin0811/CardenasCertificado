@@ -25,4 +25,4 @@ block contenido
                                 td #{trabajador.rol}
                                 td
                                     a.btn-primary.btnAccion(href=`/trabajador/editar/${trabajador._id}` role="button") Editar
-                                    a.btn-danger.btnAccion(href=`/trabajador/eliminar/${trabajador._id}` role="button") Eliminar
+                                    input.btn-danger.btnAccion(type="button" value="Eliminar" data-trabajador = trabajador._id style="border: none; height: 30px") 

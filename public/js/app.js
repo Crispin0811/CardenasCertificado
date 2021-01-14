@@ -1,0 +1,1 @@
+import trabajadores from './modulos/trabajadores'

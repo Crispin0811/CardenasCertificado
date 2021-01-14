@@ -1,4 +1,6 @@
 extends partial/master
+include mixins/actualizarTrabajador
+
 
 block contenido
     
@@ -9,26 +11,6 @@ block contenido
       //- if errores
       //- .alert.alert-warning(role="alert" style="width:400px;") A simple warning alert—check it out!
       
-      .form
-        form.sign-in-form(action="/trabajador/agregar" method="post")
-          h2.title Agregar Trabajador
-          .input-field.animate__animated.animate__zoomIn
-            i.fas.fa-user
-            input(type="text" placeholder="Nombres" name="nombres" required)
-          .input-field.animate__animated.animate__zoomIn
-            i.fas.fa-user
-            input(type="text" placeholder="Apellido Paterno" name="apePaterno" required)
-          .input-field.animate__animated.animate__zoomIn
-            i.fas.fa-user
-            input(type="text" placeholder="Apellido Materno" name="apeMaterno" required)
-          .input-field.animate__animated.animate__zoomIn
-            i.fas.fa-address-card
-            input(type="text" placeholder="DNI" name="dni" required)
-          p.animate__animated.animate__backInUp
-            label
-              input(type="checkbox" value="si" name="esDirector")
-              span Es director
-          input.btn.solid.animate__animated.animate__backInRight(type="submit" value="Agregar")
-          if error
-            p.error #{error}
+      +actualizarTrabajador(trabajadorBD)
+      
     

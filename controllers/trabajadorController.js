@@ -1,5 +1,6 @@
 const Trabajador = require("../models/trabajadorModel");
 const bcrypt = require("bcrypt");
+const { response } = require("../routes/trabajador");
 
 const getTrabajadores = async (req, res) => {
   const trabajadores = await Trabajador.find();
@@ -15,8 +16,6 @@ const verFormularioTrabajador = (req, res) => {
   });
 };
 const agregarTrabajador = async (req, res) => {
-  
-
   let body = req.body;
 
   let rol;
@@ -35,7 +34,7 @@ const agregarTrabajador = async (req, res) => {
     contrasena: bcrypt.hashSync(body.dni, 10),
   });
 
-  await trabajador.save(async(err, trabajadorBD) => {
+  await trabajador.save(async (err, trabajadorBD) => {
     if (err) {
       let error;
 
@@ -77,8 +76,74 @@ const agregarTrabajador = async (req, res) => {
 
     res.render("listaTrabajadores", {
       tituloPagina: "Lista de Trabajadores",
-      exito: "Se agregó un nuevo trabajador correctamente",
+      exito: "El trabajador fue agregado correctamente",
       trabajadores,
+    });
+  });
+};
+
+const eliminarTrabajador = async (req, res) => {
+  const { id } = req.params;
+  const trabajador = await Trabajador.findByIdAndDelete(id);
+
+  if (!trabajador) {
+    return res.status(400).send("Ocurrio un error al borrar al trabajador");
+  }
+  res
+    .status(200)
+    .send(
+      `El trabjador ${trabajador.nombre} ${trabajador.apellidoPaterno}, fue eliminado correctamente`
+    );
+};
+const editarTrabajador = async (req, res, next) => {
+  const { id } = req.params;
+  await Trabajador.findById(id, (err, trabajadorBD) => {
+    if (err) {
+      return res.send(err);
+    }
+    if (!trabajadorBD) {
+      return res.send("No se encontró trabajador");
+    }
+    res.render("agregarTrabajador", {
+      tituloPagina: "Editar Trabajador",
+      trabajadorBD,
+    });
+  });
+};
+
+const actualizarTrabajador = async (req, res) => {
+  const { id } = req.params;
+  let body = req.body;
+
+  let rol;
+  if (body.esDirector) {
+    rol = "Director";
+  } else {
+    rol = "Secretaria";
+  }
+
+  let trabajador = {
+    nombre: body.nombres,
+    apellidoPaterno: body.apePaterno,
+    apellidoMaterno: body.apeMaterno,
+    dni: body.dni,
+    rol,
+  };
+
+  Trabajador.findByIdAndUpdate(id, trabajador, async (err, trabajadorBD) => {
+    if (err) {
+      return res.status(400).json({ ok: false, err });
+    }
+    if (!trabajadorBD) {
+      return res
+        .status(400)
+        .json({ ok: false, err, mensaje: "Algo salio mal" });
+    }
+    const trabajadores = await Trabajador.find();
+    res.render("listaTrabajadores", {
+      tituloPagina: "Lista de Trabajadores",
+      trabajadores,
+      exito: "Los datos del tabajor fueron editados correctamente",
     });
   });
 };
@@ -87,4 +152,7 @@ module.exports = {
   getTrabajadores,
   verFormularioTrabajador,
   agregarTrabajador,
+  eliminarTrabajador,
+  editarTrabajador,
+  actualizarTrabajador,
 };
