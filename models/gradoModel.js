@@ -15,13 +15,6 @@ const Grado = new Schema({
     type: String,
     require: [true, "El grado es necesario"],
   },
-  cursos: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Curso",
-      require: [true, "El curso es necesario"],
-    },
-  ],
   colOrigen: {
     type: String,
     require: false,

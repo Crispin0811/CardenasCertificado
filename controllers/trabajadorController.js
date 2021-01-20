@@ -1,6 +1,5 @@
 const Trabajador = require("../models/trabajadorModel");
 const bcrypt = require("bcrypt");
-const { response } = require("../routes/trabajador");
 
 const getTrabajadores = async (req, res) => {
   const trabajadores = await Trabajador.find();
@@ -130,8 +129,21 @@ const actualizarTrabajador = async (req, res) => {
     rol,
   };
 
+  if (
+    trabajador.nombre == "" ||
+    trabajador.apellidoPaterno == "" ||
+    trabajador.apellidoMaterno == "" ||
+    trabajador.dni == "" ||
+    trabajador.dni.length != 8
+  ) {
+    return res.redirect(`/trabajador/editar/${id}`);
+  }
+  
   Trabajador.findByIdAndUpdate(id, trabajador, async (err, trabajadorBD) => {
     if (err) {
+      if (err.code && err.code == 11000) {
+        return res.redirect(`/trabajador/editar/${id}`);
+      }
       return res.status(400).json({ ok: false, err });
     }
     if (!trabajadorBD) {

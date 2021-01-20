@@ -1,9 +1,12 @@
 extends partial/master
 block contenido
     .contenido-principal
+        //- if erroresss
+        //-     .alert.alert-danger(role="alert" style="width:400px;") A simple danger alert—check it out!
+        
         .form(style="width: 800px; padding: 15px")
             h2.title Agregar Alumno
-            form.sign-in-form(action="#")
+            form.sign-in-form(action="/alumno" method="post")
 
                 #nombreApellidos(style="width: 700px; display: flex")
                     .input-field(style="margin-right: 5px")
@@ -22,17 +25,17 @@ block contenido
                     .input-field
                         i.fas.fa-portrait
                         input(type="text" placeholder="Codigo del Estudiante " name="CodEstudiante")
-                select#cantidadCursos.form-select.combo.mt-2(style="width: 30%")
+                select#cantidadCursos.form-select.combo.mt-2(style="width: 30%" name="cantCursos")
                     option(selected="") Cantidad de curso:
-                    option(value="10") 10
-                    option(value="13") 13
+                    option(value="2") 2
+                    option(value="3") 3
                 #encabezado.mt-5(style="\
                 width: 470px;\
                 display: block;\
                 margin-right: -220px;\
                 border-spacing: 5px;\
                 ")
-                    #anioLectivo(style="display: flex")
+                    #anioLectivo(style="display: flex;margin-left: 15px")
                         input#anioLectivoInicio.notas(type="text" name="anioLectivoInicio" required="")
                         select.comboAnioLectivo.form-select.mb-3(style="width: 50%; margin: auto; padding: auto" name="segGr" disabled="")
                             option(selected="") Año:
@@ -43,7 +46,7 @@ block contenido
                         select.comboAnioLectivo.form-select.mb-3(style="width: 50%; margin: auto; padding: auto" name="quiGr" disabled="")
                             option(selected="") Año:
                     #grado(style="display: flex")
-                        p(style="margin-left: 43px") 1°
+                        p(style="margin-left: 55px") 1°
                         p(style="margin-left: 80px") 2°
                         p(style="margin-left: 77px") 3°
                         p(style="margin-left: 77px") 4°
@@ -55,42 +58,66 @@ block contenido
                 border-spacing: 5px;\
                 margin-right: -40px;\
                 ")
-                
+                    #notas.divContenedor
+                        #comboCursos
+                            h6 Comportamiento:
+                    
+                        #notasInput(style="display: flex; margin-left: 80px")
+                            select.form-select.mb-3(style="width: 50%" name="compPrigr" )
+                                option(selected="") AD
+                                option A
+                                option B
+                                option C
+                            select.form-select.mb-3(style="width: 50%;margin-left: 30px" name="compSeggr" )
+                                option(selected="") AD
+                                option A
+                                option B
+                                option C
+                            select.form-select.mb-3(style="width: 50%;margin-left: 30px" name="compTergr" )
+                                option(selected="") AD
+                                option A
+                                option B
+                                option C
+                            select.form-select.mb-3(style="width: 50%;margin-left: 30px" name="compCuagr" )
+                                option(selected="") AD
+                                option A
+                                option B
+                                option C
+                            select.form-select.mb-3(style="width: 50%;margin-left: 30px" name="compQuigr" )
+                                option(selected="") AD
+                                option A
+                                option B
+                                option C
+                                
                 p
                     label
                         input#traslado.filled-in.checkbox-blue-grey(type="checkbox")
                         span ¿Es trasladado?
                 #colegiosTraslados(style="display: none")
-                    div(style="display: flex; width: 500px")
-                        select.colegios.form-select.mb-3.aniosColegios(style="\
-                        width: 100px;\
-                        margin: auto;\
-                        padding: auto;\
-                        margin-right: 20px;\
-                        " name="aniLectivo1")
-                        .input-field
+                    div(style="display: flex")
+                        
+                        .input-field(style="width: 500px !important")
                             i.fas.fa-warehouse
-                            input(type="text" placeholder="Nombre del Colegio" name="nombreColegio1")
-                    div(style="display: flex; width: 500px")
-                        select.colegios.form-select.mb-3.aniosColegios(style="\
-                        width: 100px;\
-                        margin: auto;\
-                        padding: auto;\
-                        margin-right: 20px;\
-                        " name="aniLectivo2")
-                        .input-field
+                            input(type="text" placeholder="Nombre del Colegio del 1er grado" name="nombreColegio1")
+                    div(style="display: flex")
+                        
+                        .input-field(style="width: 500px !important")
                             i.fas.fa-warehouse
-                            input(type="text" placeholder="Nombre del Colegio" name="nombreColegio2")
-                    div(style="display: flex; width: 500px")
-                        select.colegios.form-select.mb-3.aniosColegios(style="\
-                        width: 100px;\
-                        margin: auto;\
-                        padding: auto;\
-                        margin-right: 20px;\
-                        " name="aniLectivo3")
-                        .input-field
+                            input(type="text" placeholder="Nombre del Colegio del 2do grado" name="nombreColegio2")
+                    div(style="display: flex")
+                        
+                        .input-field(style="width: 500px !important")
                             i.fas.fa-warehouse
-                            input(type="text" placeholder="Nombre del Colegio" name="nombreColegio3")
+                            input(type="text" placeholder="Nombre del Colegio del 3er grado" name="nombreColegio3")
+                    div(style="display: flex")
+                        
+                        .input-field(style="width: 500px !important")
+                            i.fas.fa-warehouse
+                            input(type="text" placeholder="Nombre del Colegio del 4to grado" name="nombreColegio4")
+                    div(style="display: flex")
+                        .input-field(style="width: 500px !important")
+                            i.fas.fa-warehouse
+                            input(type="text" placeholder="Nombre del Colegio del 5to grado" name="nombreColegio5")
                 
                 input.btn.solid.animate__animated.animate__backInRight(type="submit" value="Agregar")
 

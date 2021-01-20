@@ -19,7 +19,7 @@ const Alumno = new Schema({
     require: false,
     unique: true,
   },
-  codModular: {
+  codEstudiante: {
     type: String,
     require: false,
     unique: true,
@@ -28,6 +28,13 @@ const Alumno = new Schema({
     {
       type: Schema.Types.ObjectId,
       ref: "Grado",
+    },
+  ],
+  cursos: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Curso",
+      require: [true, "El curso es necesario"],
     },
   ],
 });

@@ -1,27 +1,42 @@
 const Trabajador = require("../models/trabajadorModel");
+const passport = require("passport");
 
-const login = (req, res) => {
+const formLogin = (req, res) => {
   res.render("login", {
     tituloPagina: "Iniciar Sesión",
+    errores: res.locals.errores,
   });
 };
-const iniciarSesion = (req, res) => {
-  const { dni } = req.body;
-  const { contrasena } = req.body;
-  res.render("partial/master", {
-    tituloPagina: "Pagina Princial",
+const iniciarSesion = passport.authenticate("local", {
+  successRedirect: "/",
+  failureRedirect: "/iniciar-sesion",
+  failureFlash: true,
+  badRequestMessage: "El DNI y la contraseña son necesarios",
+});
+
+const cerrarSesion = (req, res) => {
+  req.session.destroy(() => {
+    res.redirect("/iniciar-sesion");
   });
+};
+
+const isAutenticado = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  return res.redirect("/iniciar-sesion");
 };
 
 const cambiarContrasena = (req, res) => {
-  
   res.render("cambiarContrasena", {
     tituloPagina: "Cuenta",
   });
 };
 
 module.exports = {
-  login,
+  formLogin,
   iniciarSesion,
-  cambiarContrasena
+  cambiarContrasena,
+  cerrarSesion,
+  isAutenticado,
 };

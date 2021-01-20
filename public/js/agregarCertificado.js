@@ -13,7 +13,7 @@ let anioLec1 = 0;
 const cursos = [
   { nombre: "mate", value: "matiiii" },
   { nombre: "comu", value: "comu" },
-  { nombre: "comu", value: "comu" },
+  { nombre: "ps", value: "ps" },
   { nombre: "comu", value: "comu" },
   { nombre: "comu", value: "comu" },
   { nombre: "comu", value: "comu" },
@@ -47,18 +47,14 @@ anioLectivoInicio.addEventListener("blur", (e) => {
 
   cbTraslado.checked = false;
   divColegiosTraslados.style.display = "none";
-
-
 });
 
 // LLENAR LOS CAMPOS PARA LAS NOTAS
 cantidadCursos.addEventListener("change", (e) => {
   const cantidad = parseInt(e.target.value);
 
-  if (cantidad == 10 || cantidad == 13) {
+  if (cantidad == 2 || cantidad == 3) {
     for (j = 1; j <= cantidad; j++) {
-      
-
       // div principal
       const divComboNotas = document.createElement("div");
       divComboNotas.classList.add("divContenedor");
@@ -98,6 +94,7 @@ cantidadCursos.addEventListener("change", (e) => {
         input.classList.add("notas");
         input.required = "true";
         input.name = `nota${j}${i}`;
+        input.value = "12";
         divNotasInput.appendChild(input);
       }
 

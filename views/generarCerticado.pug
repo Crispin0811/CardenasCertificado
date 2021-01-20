@@ -1,6 +1,10 @@
 extends partial/master
 block contenido
     .contenido-principal
+        if error
+            .alert.alert-danger.ml-5(role="alert" style="width:400px;") #{error}
+        if exito
+            .alert.alert-success.ml-5(role="alert" style="width:400px;") #{exito}
         .form(style="width: 800px; padding: 15px")
             h2.title Generar Certificado
             select#combo.form-select.mb-3.animate__animated.animate__backInLeft(aria-label="Default select example" style="width: 50%; margin: auto; padding: auto")
@@ -8,7 +12,7 @@ block contenido
                 option(value="1") DNI
                 option(value="2") Código del Estudiante
                 option(value="3") Nombre y Apellidos
-            form.sign-in-form(action="#")
+            form.sign-in-form(action="/certificado/buscar-alumno" method="post")
                 #dni.animate__animated.animate__slideInUp(style="display: none")
                     .input-field
                         i.fas.fa-address-card
@@ -31,16 +35,26 @@ block contenido
             table.table.table-hover.table-bordered
                 thead.table-success
                     tr.table-primary
-                        th(scope="col") DNI o codigo modular
+                        th(scope="col") DNI
+                        th(scope="col") Código del Estudiante
                         th(scope="col") Nombre
                         th(scope="col") Apellidos
                         th(scope="col") Certificado
-                tbody
-                    tr
-                        td 12345678
-                        td Luis
-                        td Solorzano Gonzales
-                        td
-                            a.btn-success.btnAccion(href="#" role="button") Imprimir
-    script(type="text/javascript" src="./js/animaciones.js")
+
+                if alumno
+                    tbody
+                        tr
+                            if alumno.dni
+                                td #{alumno.dni}
+                            else
+                                td -
+                            if alumno.codEstudiante
+                                td #{alumno.codEstudiante}
+                            else
+                                td -
+                            td #{alumno.nombre}
+                            td #{alumno.apellidoPaterno} #{alumno.apellidoMaterno}
+                            td
+                                a.btn-success.btnAccion(href=`/certificado/imprimir/${alumno._id}` role="button" ) Imprimir
+    script(type="text/javascript" src="/js/animaciones.js")
 

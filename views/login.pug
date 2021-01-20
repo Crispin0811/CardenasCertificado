@@ -10,7 +10,7 @@ head
 .container
   .forms-container
     .signin-signup
-      form.sign-in-form(action='/' method='post')
+      form.sign-in-form(action='/iniciar-sesion' method='post')
         h2.title Iniciar Sesión
         .input-field
           i.fas.fa-user
@@ -20,9 +20,9 @@ head
           input(type='password' placeholder='Contraseña' name='contrasena' required)
         input.btn.solid(type='submit' value='Iniciar')
         
-        //- if errores
-        //-   each error in errores
-        //-     p.error asasasas
+        if errores
+          each error in errores
+            p.error #{error}
 
   .panels-container
     .panel.left-panel
