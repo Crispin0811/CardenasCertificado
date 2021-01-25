@@ -7,12 +7,28 @@ const formLogin = (req, res) => {
     errores: res.locals.errores,
   });
 };
-const iniciarSesion = passport.authenticate("local", {
-  successRedirect: "/",
-  failureRedirect: "/iniciar-sesion",
-  failureFlash: true,
-  badRequestMessage: "El DNI y la contraseña son necesarios",
-});
+const iniciarSesion = (req, res, next)=>{
+  passport.authenticate("local", function (err, user, info) {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      //   return res.redirect("/iniciar-sesion");
+      return res.render("login", {
+        tituloPagina: "Iniciar Sesión",
+        error: "DNI o Contraseña invalida",
+      });
+    }
+    req.logIn(user, function (err) {
+      if (err) {
+        return next(err);
+      }
+
+      res.cookie("idTrabajador", user._id);
+      return res.redirect("/");
+    });
+  })(req, res, next);
+}
 
 const cerrarSesion = (req, res) => {
   req.session.destroy(() => {
@@ -27,16 +43,9 @@ const isAutenticado = (req, res, next) => {
   return res.redirect("/iniciar-sesion");
 };
 
-const cambiarContrasena = (req, res) => {
-  res.render("cambiarContrasena", {
-    tituloPagina: "Cuenta",
-  });
-};
-
 module.exports = {
   formLogin,
   iniciarSesion,
-  cambiarContrasena,
   cerrarSesion,
   isAutenticado,
 };

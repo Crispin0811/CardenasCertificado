@@ -138,7 +138,7 @@ const actualizarTrabajador = async (req, res) => {
   ) {
     return res.redirect(`/trabajador/editar/${id}`);
   }
-  
+
   Trabajador.findByIdAndUpdate(id, trabajador, async (err, trabajadorBD) => {
     if (err) {
       if (err.code && err.code == 11000) {
@@ -160,6 +160,87 @@ const actualizarTrabajador = async (req, res) => {
   });
 };
 
+const formCambiarContrasena = (req, res) => {
+  const idTrabajador = req.cookies.idTrabajador;
+  res.render("cambiarContrasena", {
+    tituloPagina: "Cambiar Contraseña",
+    idTrabajador,
+  });
+};
+
+const cambiarContrasena = async (req, res) => {
+  const idTrabajador = req.cookies.idTrabajador;
+  const tratabajador = await Trabajador.findById(
+    req.body.idTrabajador,
+    (err, tratabajadorBD) => {
+      if (err) {
+        return res.render("cambiarContrasena", {
+          tituloPagina: "Cambiar Contraseña",
+          error: "Usuario no existe",
+          idTrabajador,
+        });
+      }
+      if (!tratabajadorBD) {
+        return res.render("cambiarContrasena", {
+          tituloPagina: "Cambiar Contraseña",
+          error: "Usuario no existe",
+          idTrabajador,
+        });
+      }
+
+      if (
+        req.body.nuevaContraseña != req.body.repetirContraseña ||
+        req.body.contraseñaActual == "" ||
+        req.body.nuevaContraseña == "" ||
+        req.body.repetirContraseña == ""
+      ) {
+        return res.render("cambiarContrasena", {
+          tituloPagina: "Cambiar Contraseña",
+          errorContrasena: "Datos incorrectos",
+          idTrabajador,
+        });
+      }
+
+      const march = bcrypt.compareSync(
+        req.body.contraseñaActual,
+        tratabajadorBD.contrasena
+      );
+      if (!march) {
+        return res.render("cambiarContrasena", {
+          tituloPagina: "Cambiar Contraseña",
+          errorContrasena: "Contraseña incorrecta",
+          idTrabajador,
+        });
+      }
+      
+
+      let newContrasena = bcrypt.hashSync(req.body.nuevaContraseña, 10);
+      
+
+
+      tratabajadorBD.contrasena = newContrasena;
+
+      tratabajadorBD.save((err, tratabajadorBD2) => {
+        if (err) {
+          return res.json({
+            ok: " error en save",
+          });
+        }
+
+        if (!tratabajadorBD2) {
+          return res.json({
+            ok: " error en save 2",
+          });
+        }
+        res.render("cambiarContrasena", {
+          tituloPagina: "Cambiar Contraseña",
+          exito: "Contraseña Actualizada Correctamente",
+        });
+      });
+    }
+  );
+};
+
 module.exports = {
   getTrabajadores,
   verFormularioTrabajador,
@@ -167,4 +248,6 @@ module.exports = {
   eliminarTrabajador,
   editarTrabajador,
   actualizarTrabajador,
+  formCambiarContrasena,
+  cambiarContrasena,
 };

@@ -10,23 +10,20 @@ const getCertificado = (req, res) => {
 };
 
 const buscarAlumno = async (req, res) => {
-  let alumno;
+  let alumnos;
   if (req.body.dni != "") {
-    alumno = await Alumno.findOne({ dni: req.body.dni });
+    alumnos = await Alumno.findOne({ dni: req.body.dni });
   } else if (req.body.codEstudiante != "") {
-    alumno = await Alumno.findOne({ codEstudiante: req.body.codEstudiante });
+    alumnos = await Alumno.findOne({ codEstudiante: req.body.codEstudiante });
   } else {
-    alumno = await Alumno.findOne({
+    alumnos = await Alumno.find({
       nombre: req.body.nombre,
       apellidoPaterno: req.body.apellidoPater,
       apellidoMaterno: req.body.apellidoMater,
     });
   }
 
-  if (!alumno) {
-    // return res.json({
-    //   mensaje: "segundo alumno",
-    // });
+  if (!alumnos) {
     return res.render("generarCerticado", {
       tituloPagina: "Generar Certificado",
       error: "No hay Alumnos con ese tipo de busqueda",
@@ -35,7 +32,7 @@ const buscarAlumno = async (req, res) => {
 
   res.render("generarCerticado", {
     tituloPagina: "Generar Certificado",
-    alumno,
+    alumnos,
   });
 };
 
@@ -52,15 +49,22 @@ const imprimirCertificado = async (req, res) => {
   );
   doc
     // .font('fonts/PalatinoBold.ttf')
-    .fontSize(25)
-    .text(`alumno ${alumno.nombre}`, 100, 100);
+    .fontSize(12)
+    .text(".", 100, 100);
+  doc.fontSize(12).text(".", 10, 10);
+  doc.fontSize(12).text(".", 20, 20);
+  doc.fontSize(12).text("12", 20, 20);
+  doc.fontSize(14).text("14", 50, 20);
   doc
-    .moveDown()
-    .rotate(270, { origin: [150, 200] })
-    .fontSize(10)
+    .rotate(270, { origin: [150, 70] })
+    .fontSize(12)
     // x y
-    .text("rotado", 100, 200);
-
+    .text(".rotado1", 100, 100);
+  doc
+    // .rotate(270, { origin: [150, 70] })
+    .fontSize(12)
+    // x y
+    .text(".rotado2", 150, 100);
   doc.end();
 
   res.render("generarCerticado", {

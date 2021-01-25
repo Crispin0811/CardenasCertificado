@@ -8,106 +8,135 @@ const formAlumno = (req, res) => {
   });
 };
 const agregarAlumno = (req, res) => {
-  const datos = Object.values(req.body);
-
-  const { cantCursos } = req.body;
-
-  //ANIOS DE QUINTO
-  let anioPriToQui = [
-    req.body.anioLectivoInicio,
-    req.body.segGr,
-    req.body.terGr,
-    req.body.cuaGr,
-    req.body.quiGr,
-  ];
-
-  //NOTAS DE COMPORTAMIENTO
-  let comportamientos = [
-    req.body.compPrigr,
-    req.body.compSeggr,
-    req.body.compTergr,
-    req.body.compCuagr,
-    req.body.compQuigr,
-  ];
-
-  //NOMBRES DEL COLEGIOS TRASLADODOS
-  let nomColTrasladados = [
-    req.body.nombreColegio1,
-    req.body.nombreColegio2,
-    req.body.nombreColegio3,
-    req.body.nombreColegio4,
-    req.body.nombreColegio5,
-  ];
-
-  const datosCursos = datosLimpiosCursos(datos, cantCursos);
-
-  let idCursos = [];
-  let idGrados = [];
-  for (let j = 0; j < cantCursos; j++) {
-    let notas = [];
-    for (let i = 1; i <= 5; i++) {
-      notas.push(datosCursos[j][i]);
-    }
-
-    let cursos = new Curso({
-      nombre: datosCursos[j][0],
-      nota: notas,
-    });
-
-    cursos.save((err, cursosBD) => {
-      if (err) {
-        return res.json({
-          err,
-          mensaje: "primero curso",
-        });
-      }
-
-      if (!cursosBD) {
-        return res.json({
-          err,
-          mensaje: "segundo curso",
-        });
-      }
-    });
-
-    idCursos.push(cursos._id);
-  }
-
-  for (let k = 0; k < 5; k++) {
-    let grado = new Grado({
-      comportamiento: comportamientos[k],
-      anioLectivo: anioPriToQui[k],
-      grado: k + 1,
-      colOrigen: nomColTrasladados[k],
-    });
-
-    grado.save((err, gradoBD) => {
-      if (err) {
-        return res.json({
-          err,
-          mensaje: "primero grado",
-        });
-      }
-
-      if (!gradoBD) {
-        return res.json({
-          err,
-          mensaje: "segundo grado",
-        });
-      }
-    });
-    idGrados.push(grado._id);
-  }
-
   let alumno = new Alumno({
     nombre: req.body.nombre,
     apellidoPaterno: req.body.apellidoPater,
     apellidoMaterno: req.body.apellidoMater,
     dni: req.body.dni,
     codEstudiante: req.body.CodEstudiante,
-    grados: idGrados,
-    cursos: idCursos,
   });
+
+  alumno.save((err, alumnoBD) => {
+    if (err) {
+      // console.log(err.keyValue);
+      // return res.status(404).json({ mensaje: "false", err });
+
+      let error;
+      if (err.keyValue.dni) {
+        error = "Ya se registró a un alumno con ese DNI";
+      } else if (err.keyValue.codEstudiante) {
+        error = "Ya se registró a un alumno con ese código";
+      }
+
+      // if (err.keyValue) {
+      //   return res.render("agregarAlumno", {
+      //     tituloPagina: "Agregar Alumno",
+      //     error,
+      //     nombre: req.body.nombre,
+      //     apellidoPaterno: req.body.apellidoPater,
+      //     apellidoMaterno: req.body.apellidoMater,
+      //     dni: req.body.dni,
+      //     codEstudiante: req.body.CodEstudiante,
+      //   });
+      // }
+
+      return res.json({
+        err,
+      });
+    }
+
+    if (!alumnoBD) {
+      return res.status(404).json({
+        err,
+        mensaje: "segundo alumno",
+      });
+    }
+
+    return res.render("agregarNotas", {
+      tituloPagina: `Agregar notas de ${alumnoBD.nombre} ${alumnoBD.apellidoPaterno}`,
+      alumno: alumnoBD,
+    });
+  });
+};
+
+const agregarNotas = async (req, res) => {
+  const datos = Object.values(req.body);
+
+  const { cantCurso } = req.body;
+  const { gradoHidden } = req.body;
+
+  let encabezado;
+  let gradoT;
+
+  const estallerArr = getDatosArr(datos, cantCurso, 4);
+  const CursosArr = getDatosArr(datos, cantCurso, 5);
+  const NotasArr = getDatosArr(datos, cantCurso, 6);
+
+  let curso = new Curso({
+    nombre: CursosArr,
+    nota: NotasArr,
+    isTaller: estallerArr,
+  });
+
+  curso.save((err, cursoBD) => {
+    if (err) {
+      return res.json({
+        err,
+        mensaje: "primero curso",
+      });
+    }
+    if (!cursoBD) {
+      return res.json({
+        err,
+        mensaje: "segundo curso",
+      });
+    }
+  });
+
+  let grado = new Grado({
+    comportamiento: req.body.comportamiento,
+    anioLectivo: req.body.anioLectivo,
+    grado: req.body.gradoHidden,
+    colOrigen: req.body.nombreColegio,
+    cursos: curso._id,
+  });
+
+  grado.save((err, gradoBD) => {
+    if (err) {
+      return res.json({
+        err,
+        mensaje: "primero grado",
+      });
+    }
+    if (!gradoBD) {
+      return res.json({
+        err,
+        mensaje: "segundo grado",
+      });
+    }
+  });
+
+  if (gradoHidden == "1") {
+    (encabezado = "Segundo Grado"), (gradoT = "2");
+  } else if (gradoHidden == "2") {
+    (encabezado = "Tercero Grado"), (gradoT = "3");
+  } else if (gradoHidden == "3") {
+    (encabezado = "Cuarto Grado"), (gradoT = "4");
+  } else if (gradoHidden == "4") {
+    (encabezado = "Quinto Grado"), (gradoT = "5");
+  }
+
+  const alumno = await Alumno.findById(req.body.idAlumno);
+  if (!alumno) {
+    return res.status(404).json({
+      mensaje: "Alumno no encontrado",
+    });
+  }
+
+  let arrGrados = alumno.grados;
+  arrGrados.push(grado._id);
+
+  alumno.grados = arrGrados;
 
   alumno.save((err, alumnoBD) => {
     if (err) {
@@ -116,59 +145,32 @@ const agregarAlumno = (req, res) => {
         mensaje: "primero alumno",
       });
     }
-
     if (!alumnoBD) {
       return res.json({
         err,
         mensaje: "segundo alumno",
       });
     }
+
+    if (gradoHidden == "5") {
+      return res.render("agregarAlumno", {
+        tituloPagina: "Agregar Alumno",
+        exito: "El Alumno se registró correctamente",
+      });
+    }
+
+    return res.render("agregarNotas", {
+      tituloPagina: `Agregar notas de ${alumno.nombre} ${alumno.apellidoPaterno}`,
+      alumno,
+      encabezado,
+      gradoT,
+    });
   });
-
-  res.json({
-    ok: "Agregado",
-    alumno,
-  });
-
-  // let alumno = new Alumno({
-  //   nombre: nombre,
-  //   apellidoPaterno: apellidoPater,
-  //   apellidoMaterno: apellidoMater,
-  //   dni: dni,
-  //   codEstudiante: CodEstudiante,
-  //   grados: grados,
-  // });
-
-  // alumno.save((err, alumnoBD) => {
-  //   if (err) {
-  //     return res.json({
-  //       err,
-  //       mensaje: "primero",
-  //     });
-  //   }
-
-  //   if (!alumnoBD) {
-  //     return res.json({
-  //       err,
-  //       mensaje: "segundo",
-  //     });
-  //   }
-
-  //   res.json({
-  //     ok: "agregado",
-  //   });
-  // });
-
-  // console.log(req.body);
-  // console.log(datos);
-  // console.log(datosCursos);
-  // res.send("agregaste alumno");
 };
 
 const verAlumno = async (req, res) => {
   await Alumno.find()
-    .populate("grados")
-    .populate("cursos")
+    .populate({ path: "grados", populate: { path: "cursos" } })
     .exec((err, alumnoDB) => {
       if (err) {
         return res.status(400).json({
@@ -183,44 +185,25 @@ const verAlumno = async (req, res) => {
     });
 };
 
-
-
 //OTRAS FUNCIONES
-const getDatosCursos = (datos, n) => {
-  let notas = [];
-  let i = 1;
-  let notasIndex = n;
-  while (notasIndex <= datos.length) {
-    if (i <= 6) {
-      notas.push(datos[notasIndex]);
-    } else {
-      break;
-    }
-    notasIndex++;
-    i++;
-  }
 
-  return notas;
-};
-
-const datosLimpiosCursos = (datos, cantCursos) => {
-  let cursos = [];
+const getDatosArr = (datos, cantCursos, index) => {
+  let datosArr = [];
 
   let indexCursos = 1;
-  let indexDatosCursos = 16;
+  let indexDatosCursos = index;
   while (indexCursos <= cantCursos) {
-    const datosCurso = getDatosCursos(datos, indexDatosCursos);
-    cursos.push(datosCurso);
+    datosArr.push(datos[indexDatosCursos]);
     indexCursos++;
-    indexDatosCursos += 6;
+    indexDatosCursos += 3;
   }
 
-  return cursos;
+  return datosArr;
 };
 
 module.exports = {
   formAlumno,
   agregarAlumno,
   verAlumno,
-  
+  agregarNotas,
 };

@@ -2,22 +2,27 @@ extends partial/master
 
 block contenido
     .contenido-principal
-      .alert.alert-success.ml-5(role="alert" style="width:400px;") A simple success alert—check it out!
-      //- .alert.alert-danger(role="alert" style="width:400px;")
-      //-   | A simple danger alert—check it out!
-      //- .alert.alert-warning(role="alert" style="width:400px;")
-      //-   | A simple warning alert—check it out!
+      if exito
+        .alert.alert-success.ml-5(role="alert" style="width:400px;") #{exito}
+      if error
+        .alert.alert-danger.ml-5(role="alert" style="width:400px;") #{error}
       .form
-        form.sign-in-form(action="#")
-          h2.title Cambiar Constraseña
+        form.sign-in-form(action="/trabajador/cambiar-contrasena" method= "post")
+          h2.title Cambiar Contraseña
+          if idTrabajador
+            input(type="text" name="idTrabajador" value= idTrabajador  hidden)
           .input-field.animate__animated.animate__zoomIn
             i.fas.fa-lock
-            input(type="password" placeholder="Contraseña Actual" name="contraseñaActual" required)
+            input(type="password" placeholder="Contraseña Actual" name="contraseñaActual" required minlength="8" maxlength="8")
           .input-field.animate__animated.animate__zoomIn
             i.fas.fa-lock
-            input(type="password" placeholder="Nueva Contraseña" name="nuevaContraseña" id="nuevaContraseña" required)
+            input(type="password" placeholder="Nueva Contraseña" name="nuevaContraseña" id="nuevaContraseña" required minlength="8" maxlength="8")
           .input-field.animate__animated.animate__zoomIn
             i.fas.fa-lock
-            input(type="password" placeholder="Repetir Contraseña" name="repetirContraseña" id="repetirContraseña" required)
-          input.btn.solid.animate__animated.animate__backInRight(type="submit" value="Actualizar")
-          p.error asasasas
+            input(type="password" placeholder="Repetir Contraseña" name="repetirContraseña" id="repetirContraseña" required minlength="8" maxlength="8")
+          input#btnActualizar.btn.solid.animate__animated.animate__backInRight(type="submit" value="Actualizar" disabled)
+          p.error(style="display: none") Las Contraseñas deben de ser iguales
+          if errorContrasena
+            p.error #{errorContrasena}
+    script(type="text/javascript" src="/js/cambiarContrasena.js")
+    

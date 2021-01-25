@@ -25,6 +25,8 @@ passport.use(
         return done(null, false, {
           message: "Esa cuenta no existe",
         });
+
+        // return console.log(error)
       }
     }
   )

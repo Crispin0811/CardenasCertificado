@@ -14,15 +14,14 @@ head
         h2.title Iniciar Sesión
         .input-field
           i.fas.fa-user
-          input(type='text' placeholder='DNI' name='dni' required)
+          input(type='text' placeholder='DNI' name='dni' required minlength="8" maxlength="8")
         .input-field
           i.fas.fa-lock
-          input(type='password' placeholder='Contraseña' name='contrasena' required)
+          input(type='password' placeholder='Contraseña' name='contrasena' required minlength="8" maxlength="8")
         input.btn.solid(type='submit' value='Iniciar')
         
-        if errores
-          each error in errores
-            p.error #{error}
+        if error
+          p.error #{error}
 
   .panels-container
     .panel.left-panel

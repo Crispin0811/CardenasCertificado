@@ -14,6 +14,10 @@ app.post('/editar/:id',trabajadorController.actualizarTrabajador)
 //eliminar Trabajador
 app.delete('/:id',trabajadorController.eliminarTrabajador)
 
+app.get("/cambiar-contrasena", trabajadorController.formCambiarContrasena);
+app.post("/cambiar-contrasena", trabajadorController.cambiarContrasena);
+
+
 
 
 

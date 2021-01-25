@@ -1,0 +1,43 @@
+extends partial/master
+block contenido
+    .contenido-principal
+        //- if erroresss
+        //-     .alert.alert-danger(role="alert" style="width:400px;") A simple danger alert—check it out!
+        
+        .form(style="width: 800px; padding: 15px")
+            .encabezado.mt-2
+                h2.title Agregar Cursos -
+                    if encabezado
+                        h2(style="margin-left: 5px") #{encabezado}
+                    else
+                        h2(style="margin-left: 5px") Primer Grado
+            .datosAlumno.mt-5
+                h6
+                    |Alumno: 
+                    strong #{alumno.nombre} #{alumno.apellidoPaterno} #{alumno.apellidoMaterno}
+            form.sign-in-form(action="/alumno/agregar-nota" method="post")
+                input(type="text" name="gradoHidden" value=`${gradoT ? gradoT :'1'}`  hidden)
+                input(type="text" name="idAlumno" value = `${alumno._id}`  hidden)
+                #divParaLlenar.mt-5
+                    h6 Año Lectivo:
+                    input.input(type="text" placeholder="Año Lectivo" name="anioLectivo" required )
+                #divParaLlenar.mt-2
+                    h6 Cantidad de Cursos:
+                    input#cantidadCursos.input(type="text" placeholder="Cantidad de Cursos" name="cantCurso" required)
+                #notas.mt-5
+                #divParaLlenar.mt-2(style="display: none")
+                    h6 Nota de Comportamiento: 
+                    input.input(type="text" name="comportamiento" placeholder="Nota de Comportamiento" required)
+                p.mt-5
+                    label
+                        input#traslado.filled-in.checkbox-blue-grey(type="checkbox")
+                        span ¿Es trasladado?
+                #colegiosTraslados(style="display: none;margin-left: 140px")
+                    div(style="display: flex; width: 500px")
+                        
+                        .input-field
+                            i.fas.fa-warehouse
+                            input(type="text" placeholder="Nombre del Colegio" name="nombreColegio")
+                input.btn.solid.animate__animated.animate__backInRight(type="submit" value="Aceptar")
+    script(type="text/javascript" src="/js/agregarCertificado.js")
+    

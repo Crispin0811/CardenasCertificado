@@ -6,6 +6,9 @@ const alumnoController = require('../controllers/alumnoController')
 app.get('/',alumnoController.formAlumno)
 app.post('/',alumnoController.agregarAlumno)
 
+app.post('/agregar-nota',alumnoController.agregarNotas)
+
+
 app.get('/verAlumno',alumnoController.verAlumno)
 
 

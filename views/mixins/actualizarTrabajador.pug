@@ -13,7 +13,7 @@ mixin actualizarTrabajador(trabajadorBD={})
             input(type="text" placeholder="Apellido Materno" name="apeMaterno" required value=trabajadorBD.apellidoMaterno)
           .input-field.animate__animated.animate__zoomIn
             i.fas.fa-address-card
-            input(type="text" placeholder="DNI" name="dni" required value=trabajadorBD.dni)
+            input(type="text" placeholder="DNI" name="dni" minlength="8" maxlength="8" required value=trabajadorBD.dni)
           p.animate__animated.animate__backInUp
             label
               if (trabajadorBD.rol == "Director")

@@ -19,6 +19,13 @@ const Grado = new Schema({
     type: String,
     require: false,
   },
+  cursos: 
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Curso",
+      require: [true, "El curso es necesario"],
+    },
+  
 });
 
 module.exports = mongoose.model("Grado", Grado);

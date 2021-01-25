@@ -16,11 +16,11 @@ block contenido
                 #dni.animate__animated.animate__slideInUp(style="display: none")
                     .input-field
                         i.fas.fa-address-card
-                        input(type="text" placeholder="DNI" name="dni" )
+                        input(type="text" placeholder="DNI" name="dni" minlength="8" maxlength="8")
                 #codEstudiante.animate__animated.animate__slideInUp(style="display: none")
                     .input-field
                         i.fas.fa-portrait
-                        input(type="text" placeholder="Código del Estudiante" name="codEstudiante" )
+                        input(type="text" placeholder="Código del Estudiante" name="codEstudiante" minlength="14" maxlength="14")
                 #nombreApellidos.animate__animated.animate__slideInUp(style="width: 700px; display: none")
                     .input-field(style="margin-right: 5px")
                         i.fas.fa-user
@@ -41,20 +41,38 @@ block contenido
                         th(scope="col") Apellidos
                         th(scope="col") Certificado
 
-                if alumno
-                    tbody
-                        tr
-                            if alumno.dni
-                                td #{alumno.dni}
-                            else
-                                td -
-                            if alumno.codEstudiante
-                                td #{alumno.codEstudiante}
-                            else
-                                td -
-                            td #{alumno.nombre}
-                            td #{alumno.apellidoPaterno} #{alumno.apellidoMaterno}
-                            td
-                                a.btn-success.btnAccion(href=`/certificado/imprimir/${alumno._id}` role="button" ) Imprimir
+                if alumnos
+                    if (alumnos.length > 1)
+                        each alumno in alumnos
+                            tbody
+                                tr
+                                    if (`${alumno.dni}` != "")
+                                        td #{alumno.dni}
+                                    else
+                                        td -
+                                    if (`${alumno.codEstudiante}` != "")
+                                        td #{alumno.codEstudiante}
+                                    else
+                                        td -
+                                    td #{alumno.nombre}
+                                    td(style= "word-spacing: 10px") #{alumno.apellidoPaterno} #{alumno.apellidoMaterno}
+                                    td
+                                        a.btn-success.btnAccion(href=`/certificado/imprimir/${alumno._id}` role="button" ) Imprimir
+                    else
+                        tbody
+                                tr
+                                    if alumnos.dni
+                                        td #{alumnos.dni}
+                                    else
+                                        td -
+                                    if alumnos.codEstudiante
+                                        td #{alumnos.codEstudiante}
+                                    else
+                                        td -
+                                    td #{alumnos.nombre}
+                                    td(style= "word-spacing: 10px") #{alumnos.apellidoPaterno} #{alumnos.apellidoMaterno}
+                                    td
+                                        a.btn-success.btnAccion(href=`/certificado/imprimir/${alumnos._id}` role="button" ) Imprimir
+
     script(type="text/javascript" src="/js/animaciones.js")
 

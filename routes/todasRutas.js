@@ -5,7 +5,7 @@ app.use("/iniciar-sesion", require("./login"));
 app.use("/", require("./colegioActual"));
 app.use("/trabajador", require("./trabajador"));
 app.use("/certificado", require("./certificado"));
-app.use("/alumno", require("./alumno"));
+app.use("/alumno/", require("./alumno"));
 
 
 module.exports = app;
