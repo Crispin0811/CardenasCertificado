@@ -1,5 +1,7 @@
 const PDFDocument = require("pdfkit");
 const fs = require("fs");
+const path = require("path");
+const getStream = require("get-stream");
 
 const Alumno = require("../models/alumnoModel");
 
@@ -38,40 +40,39 @@ const buscarAlumno = async (req, res) => {
 
 const imprimirCertificado = async (req, res) => {
   let alumno = await Alumno.findById(req.params.id);
+  const pdfStream = await generatePdf(alumno);
 
-  let ms = new Date().getMilliseconds();
-  const doc = new PDFDocument();
+  res
+    .writeHead(200, {
+      "Content-Length": Buffer.byteLength(pdfStream),
+      "Content-Type": "application/pdf",
+      "Content-disposition": `attachment;filename=${alumno.apellidoPaterno}-certificado.pdf`,
+    })
+    .end(pdfStream);
+};
 
-  doc.pipe(
-    fs.createWriteStream(
-      `C:/Users/Kevin_CG/Desktop/certificados/output${ms}.pdf`
-    )
-  );
-  doc
-    // .font('fonts/PalatinoBold.ttf')
-    .fontSize(12)
-    .text(".", 100, 100);
-  doc.fontSize(12).text(".", 10, 10);
-  doc.fontSize(12).text(".", 20, 20);
-  doc.fontSize(12).text("12", 20, 20);
-  doc.fontSize(14).text("14", 50, 20);
-  doc
-    .rotate(270, { origin: [150, 70] })
-    .fontSize(12)
-    // x y
-    .text(".rotado1", 100, 100);
-  doc
-    // .rotate(270, { origin: [150, 70] })
-    .fontSize(12)
-    // x y
-    .text(".rotado2", 150, 100);
-  doc.end();
+generatePdf = async (alumno) => {
+  try {
+    const doc = new PDFDocument();
 
-  res.render("generarCerticado", {
-    tituloPagina: "Generar Certificado",
-    alumno,
-    exito: "El certificado se generó exitosamente",
-  });
+    doc
+      .fontSize(25)
+      .text(
+        `es ${alumno.nombre} con apellido ${alumno.apellidoPaterno}`,
+        100,
+        100
+      );
+
+    doc.pipe(fs.createWriteStream(path.join(__dirname, `../pdf/pdf.pdf`)));
+
+    doc.end();
+
+    const pdfStream = await getStream.buffer(doc);
+
+    return pdfStream;
+  } catch (error) {
+    return null;
+  }
 };
 
 module.exports = {

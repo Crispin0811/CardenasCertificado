@@ -66,7 +66,7 @@ form.sign-in-form {
   margin-bottom: 10px;
 }
 
-.input-field {
+.input-field2 {
   max-width: 380px;
   width: 100%;
   background-color: #f0f0f0;
@@ -79,7 +79,7 @@ form.sign-in-form {
   position: relative;
 }
 
-.input-field i {
+.input-field2 i {
   text-align: center;
   line-height: 55px;
   color: #acacac;
@@ -87,7 +87,7 @@ form.sign-in-form {
   font-size: 1.1rem;
 }
 
-.input-field input {
+.input-field2 input {
   background: none;
   outline: none;
   border: none;
@@ -97,7 +97,7 @@ form.sign-in-form {
   color: #333;
 }
 
-.input-field input::placeholder {
+.input-field2 input::placeholder {
   color: #aaa;
   font-weight: 500;
 }

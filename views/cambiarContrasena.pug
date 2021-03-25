@@ -11,13 +11,13 @@ block contenido
           h2.title Cambiar Contraseña
           if idTrabajador
             input(type="text" name="idTrabajador" value= idTrabajador  hidden)
-          .input-field.animate__animated.animate__zoomIn
+          .input-field2.animate__animated.animate__zoomIn
             i.fas.fa-lock
             input(type="password" placeholder="Contraseña Actual" name="contraseñaActual" required minlength="8" maxlength="8")
-          .input-field.animate__animated.animate__zoomIn
+          .input-field2.animate__animated.animate__zoomIn
             i.fas.fa-lock
             input(type="password" placeholder="Nueva Contraseña" name="nuevaContraseña" id="nuevaContraseña" required minlength="8" maxlength="8")
-          .input-field.animate__animated.animate__zoomIn
+          .input-field2.animate__animated.animate__zoomIn
             i.fas.fa-lock
             input(type="password" placeholder="Repetir Contraseña" name="repetirContraseña" id="repetirContraseña" required minlength="8" maxlength="8")
           input#btnActualizar.btn.solid.animate__animated.animate__backInRight(type="submit" value="Actualizar" disabled)

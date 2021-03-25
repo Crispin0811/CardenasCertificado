@@ -198,8 +198,8 @@ span {
 
 /* MATERILIZE */
 
-.input-field input[type="password"]:focus,
-.input-field input[type="text"]:focus {
+.input-field2 input[type="password"]:focus,
+.input-field2 input[type="text"]:focus {
   border-bottom: 1px solid #346cb0 !important;
 }
 
@@ -208,11 +208,11 @@ span {
   border: 2px solid #346cb0;
   background-color: #346cb0;
 }
-.input-field:focus-within .fas {
+.input-field2:focus-within .fas {
   color: #346cb0;
 }
 
-.input-field .fasError {
+.input-field2 .fasError {
   color: #f02849 !important;
 }
 
@@ -240,8 +240,9 @@ span {
 #colegiosTraslados .colegio {
   border-bottom: 1px solid #346cb0 !important;
   max-width: 70px;
-  margin-left: 21px;
   text-align: center;
+  margin-top: auto;
+  margin-bottom: 42px;
 }
 
 #notas .divContenedor {
@@ -272,6 +273,10 @@ span {
   border-bottom: 1px solid #346cb0 !important;
   text-align: center;
 }
+.input {
+  border-bottom: 1px solid #346cb0 !important;
+  text-align: center;
+}
 
 .datosAlumno {
   width: 400px;
@@ -293,4 +298,23 @@ span {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.sinMarginBottom {
+  margin-bottom: 0px !important;
+}
+
+.dropdown-content li {
+  min-height: 40px !important;
+}
+
+.dropdown-content li > span {
+  font-size: 12px !important;
+  color: #346cb0 !important;
+  line-height: 10px !important;
+  display: block !important;
+  padding: 10px 13px !important;
+}
+
+.input-field > .autocomplete-content {
+  width: 170px !important;
 }

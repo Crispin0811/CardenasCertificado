@@ -2,7 +2,10 @@ const Trabajador = require("../models/trabajadorModel");
 const bcrypt = require("bcrypt");
 
 const getTrabajadores = async (req, res) => {
-  const trabajadores = await Trabajador.find();
+  const trabajadores = await Trabajador.find().sort({
+    rol: 1,
+    apellidoPaterno: 1,
+  });
   res.render("listaTrabajadores", {
     tituloPagina: "Lista de Trabajadores",
     trabajadores,
@@ -11,7 +14,7 @@ const getTrabajadores = async (req, res) => {
 
 const verFormularioTrabajador = (req, res) => {
   res.render("agregarTrabajador", {
-    tituloPagina: "Agregar Trabajadores",
+    tituloPagina: "Agregar Trabajador",
   });
 };
 const agregarTrabajador = async (req, res) => {
@@ -71,7 +74,10 @@ const agregarTrabajador = async (req, res) => {
       // });
     }
 
-    const trabajadores = await Trabajador.find();
+    const trabajadores = await Trabajador.find().sort({
+      rol: 1,
+      apellidoPaterno: 1,
+    });
 
     res.render("listaTrabajadores", {
       tituloPagina: "Lista de Trabajadores",
@@ -151,7 +157,10 @@ const actualizarTrabajador = async (req, res) => {
         .status(400)
         .json({ ok: false, err, mensaje: "Algo salio mal" });
     }
-    const trabajadores = await Trabajador.find();
+    const trabajadores = await Trabajador.find().sort({
+      rol: 1,
+      apellidoPaterno: 1,
+    });
     res.render("listaTrabajadores", {
       tituloPagina: "Lista de Trabajadores",
       trabajadores,
@@ -212,11 +221,8 @@ const cambiarContrasena = async (req, res) => {
           idTrabajador,
         });
       }
-      
 
       let newContrasena = bcrypt.hashSync(req.body.nuevaContraseña, 10);
-      
-
 
       tratabajadorBD.contrasena = newContrasena;
 

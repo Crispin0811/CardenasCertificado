@@ -10,7 +10,9 @@ mongoose.connect(
   },
   (e) => {
     if (e) throw e;
-    console.log("todo es ok");
+    console.log("Todo es correcto");
   }
 );
 module.exports = mongoose;
+
+

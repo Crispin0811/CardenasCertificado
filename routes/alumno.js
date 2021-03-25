@@ -1,15 +1,22 @@
 const express = require("express");
 const app = express();
 
-const alumnoController = require('../controllers/alumnoController')
+const alumnoController = require("../controllers/alumnoController");
+const loginController = require("../controllers/loginController");
 
-app.get('/',alumnoController.formAlumno)
-app.post('/',alumnoController.agregarAlumno)
+app.get("/", loginController.isAutenticado, alumnoController.formAlumno);
+app.post("/", loginController.isAutenticado, alumnoController.agregarAlumno);
 
-app.post('/agregar-nota',alumnoController.agregarNotas)
+app.post(
+  "/agregar-nota",
+  loginController.isAutenticado,
+  alumnoController.agregarNotas
+);
 
-
-app.get('/verAlumno',alumnoController.verAlumno)
-
+app.get(
+  "/verAlumno",
+  loginController.isAutenticado,
+  alumnoController.verAlumno
+);
 
 module.exports = app;

@@ -10,20 +10,20 @@ block contenido
             form.sign-in-form(action="/alumno" method="post")
 
                 #nombreApellidos(style="width: 700px; display: flex")
-                    .input-field(style="margin-right: 5px")
+                    .input-field2(style="margin-right: 5px")
                         i.fas.fa-user
                         input(type="text" placeholder="Nombre" name="nombre" value= nombre required)
-                    .input-field(style="margin-right: 5px")
+                    .input-field2(style="margin-right: 5px")
                         i.fas.fa-user
                         input(type="text" placeholder="Apellidos Paterno" name="apellidoPater" value= apellidoPaterno required)
-                    .input-field
+                    .input-field2
                         i.fas.fa-user
                         input(type="text" placeholder="Apellidos Materno" name="apellidoMater" value= apellidoMaterno required)
                 #dniCodModular(style="width: 500px; display: flex")
-                    .input-field(style="margin-right: 5px")
+                    .input-field2(style="margin-right: 5px")
                         i.fas.fa-address-card
                         input(type="text" placeholder="DNI" name="dni" minlength="8" maxlength="8" value= dni)
-                    .input-field
+                    .input-field2
                         i.fas.fa-portrait
                         input(type="text" placeholder="Codigo del Estudiante " name="CodEstudiante" minlength="14" maxlength="14" value= codEstudiante)
                 

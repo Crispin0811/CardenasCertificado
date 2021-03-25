@@ -14,21 +14,21 @@ block contenido
                 option(value="3") Nombre y Apellidos
             form.sign-in-form(action="/certificado/buscar-alumno" method="post")
                 #dni.animate__animated.animate__slideInUp(style="display: none")
-                    .input-field
+                    .input-field2
                         i.fas.fa-address-card
                         input(type="text" placeholder="DNI" name="dni" minlength="8" maxlength="8")
                 #codEstudiante.animate__animated.animate__slideInUp(style="display: none")
-                    .input-field
+                    .input-field2
                         i.fas.fa-portrait
                         input(type="text" placeholder="Código del Estudiante" name="codEstudiante" minlength="14" maxlength="14")
                 #nombreApellidos.animate__animated.animate__slideInUp(style="width: 700px; display: none")
-                    .input-field(style="margin-right: 5px")
+                    .input-field2(style="margin-right: 5px")
                         i.fas.fa-user
                         input(type="text" placeholder="Nombre" name="nombre" )
-                    .input-field(style="margin-right: 5px")
+                    .input-field2(style="margin-right: 5px")
                         i.fas.fa-user
                         input(type="text" placeholder="Apellidos Paterno" name="apellidoPater" )
-                    .input-field
+                    .input-field2
                         i.fas.fa-user
                         input(type="text" placeholder="Apellidos Materno" name="apellidoMater" )
                 input.btn.solid.animate__animated.animate__backInRight(type="submit" value="Buscar")
@@ -57,7 +57,7 @@ block contenido
                                     td #{alumno.nombre}
                                     td(style= "word-spacing: 10px") #{alumno.apellidoPaterno} #{alumno.apellidoMaterno}
                                     td
-                                        a.btn-success.btnAccion(href=`/certificado/imprimir/${alumno._id}` role="button" ) Imprimir
+                                        a.btn-success.btnAccion(href=`/certificado/imprimir/${alumno._id}` role="button" target="blank" ) Imprimir
                     else
                         tbody
                                 tr

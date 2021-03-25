@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index",
-    "start": "concurrently \"npm run dev\" \"npm run watch\"",
+    "start": "concurrently \"npm run mongo\" \"npm run dev\" ",
+    "mongo": "mongod",
     "watch": "webpack -w --mode development"
   },
   "author": "Kevin Crispin",

@@ -2,16 +2,16 @@ mixin actualizarTrabajador(trabajadorBD={})
     .form
         form.sign-in-form(action=`${trabajadorBD._id ? `/trabajador/editar/${trabajadorBD._id}`:'/trabajador/agregar'}` method="post")
           h2.title #{tituloPagina}
-          .input-field.animate__animated.animate__zoomIn
+          .input-field2.animate__animated.animate__zoomIn
             i.fas.fa-user
             input(type="text" placeholder="Nombres" name="nombres" required value=trabajadorBD.nombre)
-          .input-field.animate__animated.animate__zoomIn
+          .input-field2.animate__animated.animate__zoomIn
             i.fas.fa-user
             input(type="text" placeholder="Apellido Paterno" name="apePaterno" required value=trabajadorBD.apellidoPaterno)
-          .input-field.animate__animated.animate__zoomIn
+          .input-field2.animate__animated.animate__zoomIn
             i.fas.fa-user
             input(type="text" placeholder="Apellido Materno" name="apeMaterno" required value=trabajadorBD.apellidoMaterno)
-          .input-field.animate__animated.animate__zoomIn
+          .input-field2.animate__animated.animate__zoomIn
             i.fas.fa-address-card
             input(type="text" placeholder="DNI" name="dni" minlength="8" maxlength="8" required value=trabajadorBD.dni)
           p.animate__animated.animate__backInUp

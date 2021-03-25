@@ -26,7 +26,6 @@ passport.use(
           message: "Esa cuenta no existe",
         });
 
-        // return console.log(error)
       }
     }
   )

@@ -1,24 +1,52 @@
 const express = require("express");
 const app = express();
-const trabajadorController =require('../controllers/trabajadorController')
+const trabajadorController = require("../controllers/trabajadorController");
+const loginController = require("../controllers/loginController");
 
-app.get('/',trabajadorController.getTrabajadores)
-app.get('/agregar',trabajadorController.verFormularioTrabajador)
-app.post('/agregar',trabajadorController.agregarTrabajador)
+app.get(
+  "/",
+  loginController.isAutenticado,
+  trabajadorController.getTrabajadores
+);
+app.get(
+  "/agregar",
+  loginController.isAutenticado,
+  trabajadorController.verFormularioTrabajador
+);
+app.post(
+  "/agregar",
+  loginController.isAutenticado,
+  trabajadorController.agregarTrabajador
+);
 
 //acctualizar trabajador
-app.get('/editar/:id',trabajadorController.editarTrabajador)
-app.post('/editar/:id',trabajadorController.actualizarTrabajador)
-
+app.get(
+  "/editar/:id",
+  loginController.isAutenticado,
+  trabajadorController.editarTrabajador
+);
+app.post(
+  "/editar/:id",
+  loginController.isAutenticado,
+  trabajadorController.actualizarTrabajador
+);
 
 //eliminar Trabajador
-app.delete('/:id',trabajadorController.eliminarTrabajador)
+app.delete(
+  "/:id",
+  loginController.isAutenticado,
+  trabajadorController.eliminarTrabajador
+);
 
-app.get("/cambiar-contrasena", trabajadorController.formCambiarContrasena);
-app.post("/cambiar-contrasena", trabajadorController.cambiarContrasena);
-
-
-
-
+app.get(
+  "/cambiar-contrasena",
+  loginController.isAutenticado,
+  trabajadorController.formCambiarContrasena
+);
+app.post(
+  "/cambiar-contrasena",
+  loginController.isAutenticado,
+  trabajadorController.cambiarContrasena
+);
 
 module.exports = app;

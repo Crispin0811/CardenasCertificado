@@ -1,5 +1,4 @@
 // instanciando
-// const combo = document.getElementById("combo");
 const anioLectivoInicio = document.getElementById("anioLectivoInicio");
 const selectAnioLectivo = document.querySelectorAll(".comboAnioLectivo");
 const cantidadCursos = document.getElementById("cantidadCursos");
@@ -7,16 +6,6 @@ const divNotas = document.getElementById("notas");
 const cbTraslado = document.getElementById("traslado");
 const divColegiosTraslados = document.getElementById("colegiosTraslados");
 const divComportamiento = document.querySelectorAll("#divParaLlenar")[2];
-
-// arr de los cursos
-const cursos = [
-  { nombre: "mate", value: "matiiii" },
-  { nombre: "comu", value: "comu" },
-  { nombre: "ps", value: "ps" },
-  { nombre: "comu", value: "comu" },
-  { nombre: "comu", value: "comu" },
-  { nombre: "comu", value: "comu" },
-];
 
 //EVENTOS
 
@@ -61,28 +50,40 @@ cantidadCursos.addEventListener("blur", (e) => {
       inputHidden.name = `esTaller${j}`;
       inputHidden.hidden = true;
 
-      // llenar los combo de los cursos
-      const select = document.createElement("select");
-      select.id = "combo";
-      select.classList.add("form-select");
-      select.style.width = "90%";
-      select.required = true;
-      select.name = `curso${j}`;
+      //PARA AUTOCOMPLETADO
 
-      // AGREGAR OPCION SELECTED
-      const optionSelected = document.createElement("option");
-      optionSelected.innerText = `Agregar Curso ${j}:`;
-      optionSelected.value = "";
-      select.appendChild(optionSelected);
+      const divAuto = document.createElement("div");
+      divAuto.classList.add("row", "sinMarginBottom");
 
-      cursos.forEach((curso) => {
-        const option = document.createElement("option");
-        option.value = curso.value;
-        option.innerText = curso.nombre;
-        select.appendChild(option);
-      });
+      const divAuto2 = document.createElement("div");
+      divAuto2.classList.add("col");
 
-      // divNotas.appendChild(select);
+      const divAuto3 = document.createElement("div");
+      divAuto3.classList.add("row");
+
+      const divAuto4 = document.createElement("div");
+      divAuto4.classList.add("input-field", "col");
+
+      const inputAuto = document.createElement("input");
+      inputAuto.type = "text";
+      inputAuto.id = `curso${j}`;
+      inputAuto.classList.add("autocomplete", "input");
+      inputAuto.name = `curso${j}`;
+
+      const labelAuto = document.createElement("label");
+      labelAuto.setAttribute("for", `curso${j}`);
+      labelAuto.innerText = `Agregar Curso ${j}:`;
+
+      divAuto4.appendChild(inputAuto);
+      divAuto4.appendChild(labelAuto);
+
+      divAuto3.appendChild(divAuto4);
+
+      divAuto2.appendChild(divAuto3);
+
+      divAuto.appendChild(divAuto2);
+
+      //PARA AUTOCOMPLETADO
 
       const input = document.createElement("input");
       input.type = "number";
@@ -91,14 +92,15 @@ cantidadCursos.addEventListener("blur", (e) => {
       input.required = "true";
       input.min = "11";
       input.max = "20";
-      input.value = "20"; //dfsdfjksdhkfjhsdkjhfkjsdhkfjhsdkfhskdj
       input.name = `nota${j}`;
 
       divNotas.appendChild(inputHidden);
 
       divNotas.appendChild(divEsTaller);
 
-      divNotas.appendChild(select);
+      divNotas.appendChild(divAuto);
+
+      // divNotas.appendChild(select);
 
       divNotas.appendChild(input);
     }
@@ -118,6 +120,7 @@ cantidadCursos.addEventListener("blur", (e) => {
       });
     });
   }
+  autocompletarCampos();
 });
 
 //PARA LOS COMBOS DE LOS TRASLADOS
@@ -128,3 +131,59 @@ cbTraslado.addEventListener("change", (e) => {
     divColegiosTraslados.style.display = "none";
   }
 });
+
+//PARA LLENAR LOS CAMPOS CON LOS CURSOS
+
+let options = {
+  //COMO MAX 23 L.
+  data: {
+    Matemática: null,
+    Comunicación: null,
+    Ingles: null,
+    Arte: null,
+    "Historia, Geografía y Economía": null,
+    "Formación Ciudadana y Cívica": null,
+    "Persona, Familia y Relaciones Humanas": null,
+    "Educación Física": null,
+    "Educación Religiosa": null,
+    "Ciencia Tecnología y Ambiente": null,
+    "Educación para el Trabajo": null,
+    "Desarrollo personal, ciudadanía y cívica": null,
+    "Ciencias sociales": null,
+    "Arte y cultura": null,
+    "Ciencia tecnología": null,
+    "Castellano como segunda lengua": null,
+    "Especialidad Ocupacional": null,
+    "Razonamiento Matemático": null,
+    "Habilidades Comunicativas": null,
+    Literatura: null,
+    "Geografía Perú y Mundo": null,
+    "Educación Cívica": null,
+    "Economía Política": null,
+    "Filosofía y Lógica": null,
+    "Educación Artística": null,
+    Física: null,
+    "Formación Laboral": null,
+    "Historia del Perú": null,
+    "Historia Universal": null,
+    "Lenguaje y Literatura": null,
+    "Ciencias Naturales": null,
+    Psicología: null,
+    Biología: null,
+    Lenguaje: null, //este
+    "Geografía del Perú y del Mundo": null, //este
+    Quimica: null,
+    "Educación Cívica, Patri": null, //este FALTA
+    "Educ. ARTE": null, //este FALTA
+    "Educación Cívica y Militar": null, //este FALTA
+  },
+};
+
+function autocompletarCampos() {
+  let elems = document.querySelectorAll(".autocomplete");
+  elems.forEach((ele) => {
+    let instances = M.Autocomplete.init(ele, options);
+  });
+}
+
+//PARA LLENAR LOS CAMPOS CON LOS CURSOS
